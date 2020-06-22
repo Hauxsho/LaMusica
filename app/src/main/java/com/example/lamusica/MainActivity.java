@@ -16,6 +16,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -24,14 +25,15 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public  static final int REQUEST_CODE = 1;
-    ArrayList<MusicFiles> musicFiles;
+    static ArrayList<MusicFiles> musicFiles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        permission();
         initViewPager();
+        permission();
+
     }
 
     private void initViewPager() {
@@ -49,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
         {
             ActivityCompat.requestPermissions(MainActivity.this , new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_CODE);
-            musicFiles=getAllAudio(this);
         }
         else
         {
-            Toast.makeText(this, "Permission.granted", Toast.LENGTH_SHORT).show();
+            musicFiles=getAllAudio(this);
+            initViewPager();
         }
     }
 
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             if(grantResults[0]==PackageManager.PERMISSION_GRANTED)
             {
                 musicFiles= getAllAudio(this);
+                initViewPager();
             }
             else
             {
@@ -99,6 +102,12 @@ public class MainActivity extends AppCompatActivity {
         public int getCount() {
             return fragments.size();
         }
+
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles.get(position);
+        }
     }
 
     public static ArrayList<MusicFiles>getAllAudio(Context context)
@@ -116,12 +125,12 @@ public class MainActivity extends AppCompatActivity {
             while(cursor.moveToNext())
             {
                 String album = cursor.getString(0);
-                String title = cursor.getString(0);
-                String duration = cursor.getString(0);
-                String path = cursor.getString(0);
-                String artist = cursor.getString(0);
+                String title = cursor.getString(1);
+                String duration = cursor.getString(2);
+                String path = cursor.getString(3);
+                String artist = cursor.getString(4);
                 MusicFiles musicFiles= new MusicFiles(path , title , artist,album,duration);
-
+                Log.e("Path : "+path,"Album : "+album);
                 tempAudioList.add(musicFiles);
             }
             cursor.close();
