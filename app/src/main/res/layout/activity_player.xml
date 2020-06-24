@@ -10,56 +10,61 @@
     tools:context=".Player">
 
     <RelativeLayout
+        android:id="@+id/top_button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/top_button"
-        android:background="@drawable/gradient_bg"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/gradient_bg">
+
         <ImageView
+            android:id="@+id/back_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:id="@+id/back_button"
-            android:src="@drawable/ic_keyboard_arrow_left"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true" />
+            android:src="@drawable/ic_keyboard_arrow_left" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/menu_button"
+            android:layout_toLeftOf="@+id/menu_button"
+            android:layout_toEndOf="@+id/back_button"
+            android:layout_toRightOf="@+id/back_button"
+            android:background="@android:color/transparent"
+            android:gravity="center"
             android:text="NOW PLAYING..."
             android:textColor="@color/colorAccent"
-            android:layout_toEndOf="@+id/back_button"
-            android:layout_toStartOf="@+id/menu_button"
-            android:gravity="center"
-            android:background="@android:color/transparent"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_toRightOf="@+id/back_button"
-            tools:ignore="UnknownId"
-            android:layout_toLeftOf="@+id/menu_button" />
+            tools:ignore="UnknownId" />
+
         <ImageView
+            android:id="@+id/menu_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:id="@+id/menu_button"
-            android:src="@drawable/ic_menu24dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_menu24dp" />
 
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="400dp"
         android:id="@+id/card"
         android:layout_below="@+id/top_button">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:id="@+id/coverArt"
-            android:src="@drawable/ic_menu24dp"/>
+            android:src="@drawable/lamusica"/>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="250dp"

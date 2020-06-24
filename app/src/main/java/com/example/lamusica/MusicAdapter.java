@@ -2,9 +2,7 @@ package com.example.lamusica;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaMetadata;
 import android.media.MediaMetadataRetriever;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +43,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         }
         else
         {
-            Glide.with(mContext).asBitmap().load(R.drawable.ic_play).into(holder.albumArt);
+            Glide.with(mContext).asBitmap().load(R.drawable.lamusica).into(holder.albumArt);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
